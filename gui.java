@@ -1,168 +1,301 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 
 package imagewatermarking;
 
-import static imagewatermarking.authentication.tampered;
-import java.awt.Color;
-import java.awt.image.BufferedImage;
+import java.awt.Image;
 import java.io.File;
 import java.io.IOException;
-import javax.imageio.ImageIO;
-
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.ImageIcon;
+import javax.swing.JFileChooser;
 /**
  *
  * @author Akash EJ
  */
-public class repairing_keyless {
+public class gui extends javax.swing.JFrame {
 
-    static int w,h;
-        static int flag=1;
-    public static int validate(int x,int y,BufferedImage cat)
-    {
-    int color;
-    y=(y-(cat.getHeight()/2))-(cat.getHeight()%2);
-    if(y<0)
-        y+=cat.getHeight();
-    
-     color=((cat.getRGB(x, y) >> 24) & 0xFF)-238;
-        //System.out.println(color);
-   //     color= ((cat.getRGB(key[x][y][0],key[x][y][1]) >> 24) & 0xFF)-238;
-  //  color=key[x][y][2];
-   //// System.out.println(x+" "+y+" "+color+" "+key[x][y][0]+" "+key[x][y][1]);
-    return color;
+    /**
+     * Creates new form gui
+     */
+int flagi=0,flagk=0;
+String pathk,pathi;
+
+    public gui() {
+        initComponents();
     }
-public static void main(String Path) throws IOException, ClassNotFoundException 	
 
-{		
-       // Save the image file as a BufferedImage object	
-    BufferedImage cat = ImageIO.read(new File(Path));
-    
-          ////          System.out.println("\n The key array importerd is:\n");
-          ////      for(h=0;h<cat.getHeight();h++){
-          ////           for(w=0;w<cat.getWidth();w++)
-               ////          System.out.print("  "+key[w][h][0]+","+key[w][h][1]+" ("+(((cat.getRGB(key[w][h][0],key[w][h][1]) >> 24) & 0xFF)-238)+") "+"("+(cat.getRGB(key[w][h][0],key[w][h][1]) & 0xFF)+")  ");
-               ////      System.out.print("\n");}
-                
-		// Loop through all the pixels in the image (w = width, h = height)		
-                int p1,p2,p3,p4,p5,p6;
-                int color[]=new int [6];
-		for(int width = 0; width < cat.getWidth()-2 ; width+=3)		
-		{			
-			for(int height = 0 ; height < cat.getHeight()-1 ; height+=2)			
-			{
-                            if(tampered[width][height]==-1)
-                            
-                            {
-                              
-                            //  System.out.println(p1+" "+p2+" "+p3+" "+p4+" "+p5+" "+p6+" "+a1+" "+a2);
-                                color[0]=-1;
-                                color[1]=-1;
-                                color[2]=validate(width+1,height,cat);
-                                color[3]=validate(width+1,height+1,cat);
-                                color[4]=validate(width+2,height,cat);
-                                color[5]=validate(width+2,height+1,cat);
-            ////                System.out.println("Shares calculated are: "+color[0]+" "+color[1]+" "+color[2]+" "+color[3]+" "+color[4]+" "+color[5]);
-                                int [] secret=revshamiradv(color);
-          ////                      System.out.println("secret 0 is "+secret[0]+" Secret 1 is "+secret[1]);
-                                p1=(secret[0]&2)>>1;
-                                p2= secret[0]&1;
-                                p3=(secret[1]&8)>>3;
-                                p4=(secret[1]&4)>>2;
-                                p5=(secret[1]&2)>>1;
-                                p6=secret[1]&1;
-           ////                     System.out.println(p1+" "+p2+" "+p3+" "+p4+" "+p5+" "+p6+" "+width+" "+height); 
-                                p1=revbin(p1);
-                                p2=revbin(p2);
-                                p3=revbin(p3);
-                                p4=revbin(p4);
-                                p5=revbin(p5);
-                                p6=revbin(p6);
-          ////                      System.out.println(p1+" "+p2+" "+p3+" "+p4+" "+p5+" "+p6+" "+width+" "+height);                                if(secret[0]==3&&secret[1]==15)
-                        //            flag=0;
-                                
-                                cat.setRGB( width, height,p1);
-                                cat.setRGB( width, height+1,p2);
-                                cat.setRGB( width+1, height,p3);
-                                cat.setRGB( width+1, height+1,p4);
-                                cat.setRGB( width+2, height,p5);
-                                cat.setRGB( width+2, height+1,p6);
-                                
-                            }	
-                        }	
-		}
-                if(flag==1)
-                System.out.println("Image Repaired");
-                else
-                 System.out.println("Some Blocks unrepaired");
-                flag=1;
-                Path=Path.replace("_watermarked.png","");
-                ImageIO.write(cat, "png", new File(Path+"_repaired.png"));
+    /**
+     * This method is called from within the constructor to initialize the form.
+     * WARNING: Do NOT modify this code. The content of this method is always
+     * regenerated by the Form Editor.
+     */
+  //  @SuppressWarnings("unchecked")
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">                          
+    private void initComponents() {
+
+        image = new javax.swing.JButton();
+        jLabel3 = new javax.swing.JLabel();
+        imageLabel = new javax.swing.JLabel();
+        watermark = new javax.swing.JButton();
+        authenticate = new javax.swing.JButton();
+        key = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
+
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setBackground(new java.awt.Color(153, 153, 255));
+
+        image.setText("Select Image");
+        image.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                imageActionPerformed(evt);
+            }
+        });
+
+        jLabel3.setText("preview");
+
+        imageLabel.setBackground(new java.awt.Color(255, 51, 102));
+        imageLabel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+
+        watermark.setText("Watermark");
+        watermark.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                watermarkActionPerformed(evt);
+            }
+        });
+
+        authenticate.setText("Authenticate");
+        authenticate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                authenticateActionPerformed(evt);
+            }
+        });
+
+        key.setText("Select Key File");
+        key.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                keyActionPerformed(evt);
+            }
+        });
+
+        jLabel1.setText("Key File:");
+
+        jButton1.setText("Repair");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
+        jButton2.setText("Keyless Watermarking");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
+        jButton3.setText("Self  Repairing");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 509, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap())
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(authenticate, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(image, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(key, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(watermark, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jButton2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jButton3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(389, 389, 389)
+                                .addComponent(jLabel3)
+                                .addContainerGap(20, Short.MAX_VALUE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(imageLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addContainerGap())))))
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel2))
+                .addGap(23, 23, 23)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel3)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(15, 15, 15)
+                                .addComponent(watermark)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(key)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(authenticate)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jButton1)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jButton2)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jButton3))
+                            .addGroup(layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(imageLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addComponent(image))
+                .addContainerGap(146, Short.MAX_VALUE))
+        );
+
+        pack();
+    }// </editor-fold>                        
+
+    private void imageActionPerformed(java.awt.event.ActionEvent evt) {                                      
+        // TODO add your handling code here:
+         JFileChooser chooser = new JFileChooser("D:\\New folder");
+                chooser.showOpenDialog(null);
+         File f= chooser.getSelectedFile();
+         pathi= f.getAbsolutePath();
+         ImageIcon icon = new ImageIcon(pathi);
+         Image img = icon.getImage();
+         Image scaleImage = icon.getImage().getScaledInstance(280, 200, Image.SCALE_DEFAULT);
+         ImageIcon i = new ImageIcon(scaleImage);
+         flagi=1;
+
+         
+        imageLabel.setIcon(i);
+    }                                     
+
+    private void watermarkActionPerformed(java.awt.event.ActionEvent evt) {                                          
+        try {
+            // TODO add your handling code here:
+            if(flagi!=1)
+                System.err.println("Select the image to be watermarked");
+            else
+            {
+                String pathb=greyscale.main(pathi);
+            watermarking.main(pathb);
+            }
+        } catch (IOException ex) {
+            Logger.getLogger(gui.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }                                         
 
-    public static int revbin(int color){		
-    if(color==1)
-        color=255;
-    
-    Color c=new Color(color,color,color);
-    return c.getRGB();}       
-    
-    static private int[] revshamiradv(int[] alpha)
-    {
-      int f=0,d,c1;
-      int alpha1[]=new int[2];
-      int secret[]=new int[2];
-      int x[]=new int[2];
-      int m[]=new int[2];
-      for(int i=0;i<6;i++)
-      {
-          if(alpha[i]==-1)
-          {
-      ////        System.out.println(i+" th share found corrupt...searching for the next share");
-              continue;
-          }
-              else
-          {
-       ////       System.out.println(i+" th share found ...searching for the next share");
-              alpha1[f]=alpha[i];
-              x[f]=i+1;
-              f++;
-           }
-          
-          if(f==2)
-              break;
-     }
-      if(f!=2)
-      { ////  System.out.println("Unable to get 2 distinct reliable shares... block cannot be repaired");
-          secret[0]=3;
-          secret[1]=15;
-          flag=0;
-          return secret;
-      }   
-    ////  System.out.println("the value of f is "+f+" THe shares obtained are "+alpha1[0]+" "+alpha1[1]+" The x values are "+x[0]+" "+x[1]);
-      m[0]=alpha1[0]*x[1]/(x[0]-x[1]);
-      m[1]=alpha1[1]*x[0]/(x[1]-x[0]);
-      
-      d=(-1*(m[0]+m[1]))%17;
-      if (d < 0)
-{
-    d += 17;
-}
-      c1=(alpha1[1]-alpha1[0])%17;
-      if (c1< 0)
-{
-    c1 += 17;
-}
-      secret[1]=d;
-      secret[0]=c1;
-      return secret;
+    private void authenticateActionPerformed(java.awt.event.ActionEvent evt) {                                             
+        try {
+            // TODO add your handling code here:
+            //System.out.println(flagk);
+            authentication.main(pathi);
+        } catch (IOException | ClassNotFoundException ex) {
+            Logger.getLogger(gui.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }                                            
+
+    private void keyActionPerformed(java.awt.event.ActionEvent evt) {                                    
+        // TODO add your handling code here:
+        JFileChooser chooser = new JFileChooser("D:\\New folder");
+                chooser.showOpenDialog(null);
+         File key= chooser.getSelectedFile();
+         pathk= key.getAbsolutePath(); 
+         jLabel2.setText(pathk);
+         flagk=1;
+         //System.out.println(flagk);
+    }                                   
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {                                         
+        try {
+            // TODO add your handling code here:
+            //System.out.println(flagk);
+            if(flagk!=1)
+                System.err.println("Select the key file");
+            else
+            repairing.main(pathi,pathk);
+        } catch (IOException | ClassNotFoundException ex) {
+            Logger.getLogger(gui.class.getName()).log(Level.SEVERE, null, ex);
+        }        // TODO add your handling code here:
+    }                                        
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {                                         
+        // TODO add your handling code here:
+         try {
+            // TODO add your handling code here:
+            if(flagi!=1)
+                System.err.println("Select the image to be watermarked");
+            else
+            {
+                String pathb=greyscale.main(pathi);
+               
+            watermarking_keyless.main(pathb);
+            }
+        } catch (IOException ex) {
+            Logger.getLogger(gui.class.getName()).log(Level.SEVERE, null, ex);
+        }  
+    }                                        
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {                                         
+        // TODO add your handling code here:
+                try {
+              repairing_keyless.main(pathi);
+        } catch (IOException | ClassNotFoundException ex) {
+            Logger.getLogger(gui.class.getName()).log(Level.SEVERE, null, ex);
+        } 
+    }                                        
+
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String args[]) {
+        /* Set the Nimbus look and feel */
+        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+        /* Setting the look and feel to default
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         */
+        try {
+                    javax.swing.UIManager.setLookAndFeel((javax.swing.UIManager.getSystemLookAndFeelClassName()));
+
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(gui.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
+        //</editor-fold>
+
+        /* Create and display the form */
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new gui().setVisible(true);
+            }
+        });
     }
-    
 
+    // Variables declaration - do not modify                     
+    private javax.swing.JButton authenticate;
+    private javax.swing.JButton image;
+    private javax.swing.JLabel imageLabel;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JButton key;
+    private javax.swing.JButton watermark;
+    // End of variables declaration                   
 }
-
-    
-
