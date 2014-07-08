@@ -21,3 +21,4 @@ To run the project:
 10.click the authenticate button and authenticate the image. Image will be found tampered.
 11.Click the self repair image and the original image is recreated from the tampered image.
 12.If the buttons are pressed in different orders, different exceptions would arise. This is because, global values are used and each class changes these values affecting the initial conditions.
+
