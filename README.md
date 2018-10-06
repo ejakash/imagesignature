@@ -1,6 +1,13 @@
 imagesignature
 ==============
 
+This is my first Java Project. The project implements watermarking, authentication and repairing (data recovery) of images based on shamirs secret sharing algorithm based on this paper https://ieeexplore.ieee.org/document/5893939. 
+
+Other contributors to the Project are:
+Aditya Mohandasan : aditya.mohandasan@gmail.com
+Dhruv Nambiar : dhruvnam@gmail.com
+Linta Sheelkumar : lintasheelkumar@gmail.com
+
 Converts an image to a unique signature without and visible changes in the image and add authentication self repair capability to the image.
 
 The entire project was done using netbeans IDE.
